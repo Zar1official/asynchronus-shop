@@ -1,0 +1,3 @@
+TOKEN = ""
+MONGO_KEY = ""
+ADMIN_IDS = {}
