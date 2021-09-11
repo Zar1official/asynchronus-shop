@@ -9,8 +9,8 @@ loop = asyncio.get_event_loop()
 bot = Bot(token=config.TOKEN, parse_mode='HTML')
 storage = MemoryStorage()
 dp = Dispatcher(bot, loop, storage)
-subscribeDB = SubDB(config.MONGO_KEY, "users", "subscribers")
-shopDB = ShopDB(config.MONGO_KEY, "products", 'catalog')
+subscribeDB = SubDB(config.MONGO_KEY_2, config.SUBSCRIBE_DB_NAME, config.SUBSCRIBE_DB_COLLECTION)
+shopDB = ShopDB(config.MONGO_KEY_1, config.SHOP_DB_NAME, config.SHOP_DB_COLLECTION)
 
 
 
