@@ -8,6 +8,8 @@ admin_nav = InlineKeyboardMarkup().add(
     InlineKeyboardButton('Очистить магазин', callback_data='clean_shop')
 ).add(
     InlineKeyboardButton('Новость для подписчиков', callback_data='news_for_subs')
+).add(
+    InlineKeyboardButton('Добавить администратора', callback_data='add_admin')
 )
 
 confirm_adding_product = InlineKeyboardMarkup().add(
