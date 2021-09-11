@@ -9,4 +9,3 @@ async def clean_shop(query: CallbackQuery):
     await bot.send_message(query.from_user.id, "Магазин очищен!")
     await query.answer()
 
-#test
