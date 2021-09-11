@@ -1,43 +1,5 @@
-import motor.motor_asyncio
+from .database import DB
 from bson import ObjectId
-
-
-class DB:
-    def __init__(self, key, db_name, coll_name):
-        self.cluster = motor.motor_asyncio.AsyncIOMotorClient(key)
-        self.db = self.cluster[f'{db_name}']
-        self.collection = self.db[f'{coll_name}']
-
-
-class SubDB(DB):
-    async def add_user(self, user_id):
-        await self.collection.insert_one(
-            {
-                "_id": user_id
-            }
-        )
-
-    async def delete_user(self, user_id):
-        await self.collection.delete_one(
-            {
-                "_id": user_id
-            }
-        )
-
-    async def user_exists(self, user_id):
-        result = await self.collection.find_one(
-            {
-                "_id": user_id
-            }
-        )
-        return result
-
-    async def get_users(self):
-        cursor = self.collection.find({})
-        result = []
-        async for document in cursor:
-            result.append(document)
-        return result
 
 
 class ShopDB(DB):
@@ -71,4 +33,3 @@ class ShopDB(DB):
 
     async def get_product_data(self, product_id):
         return await self.collection.find_one({"_id": ObjectId(product_id)})
-

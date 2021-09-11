@@ -3,7 +3,7 @@ from aiogram.contrib.fsm_storage.memory import MemoryStorage
 import config
 import asyncio
 
-from dbs.mongo_db import SubDB, ShopDB
+from db import ShopDB, SubDB
 
 loop = asyncio.get_event_loop()
 bot = Bot(token=config.TOKEN, parse_mode='HTML')
