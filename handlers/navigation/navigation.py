@@ -2,12 +2,13 @@ from aiogram import types
 import config
 from loader import dp, subscribeDB
 from markups import subscribe_mailing_markups, admin_markups
+from utils.navigation_utils import send_products
 
 
 @dp.message_handler()
 async def navigation(message: types.Message):
     if message.text == "Товары 🔥":
-        pass
+        await send_products(dp, message.from_user.id)
     elif message.text == "Рассылка ✉":
         if await subscribeDB.user_exists(message.from_user.id):
             await message.answer('Отписаться от рассылки?',
