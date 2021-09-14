@@ -2,7 +2,7 @@ from aiogram import Dispatcher
 import asyncio
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 
-from loader import subscribeDB, shopDB
+from loader import shopDB
 
 
 async def send_products(dp: Dispatcher, user_id):
@@ -23,4 +23,3 @@ async def send_products(dp: Dispatcher, user_id):
             )
         )))
     await asyncio.gather(*basket)
-

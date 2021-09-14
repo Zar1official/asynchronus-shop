@@ -3,7 +3,7 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 admin_nav = InlineKeyboardMarkup().add(
     InlineKeyboardButton('Добавить товар', callback_data='add_product'),
 ).add(
-    InlineKeyboardButton('Удалить/Изменить товары', callback_data='update_product')
+    InlineKeyboardButton('Удалить товары', callback_data='remove_product')
 ).add(
     InlineKeyboardButton('Очистить магазин', callback_data='clean_shop')
 ).add(

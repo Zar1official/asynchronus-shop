@@ -33,3 +33,7 @@ class ShopDB(DB):
 
     async def get_product_data(self, product_id):
         return await self.collection.find_one({"_id": ObjectId(product_id)})
+
+    async def get_product_attr(self, product_id, key):
+        data = await self.get_product_data(product_id)
+        return data[key]

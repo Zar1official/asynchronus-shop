@@ -30,3 +30,4 @@ class SubDB(DB):
         async for document in cursor:
             result.append(document)
         return result
+

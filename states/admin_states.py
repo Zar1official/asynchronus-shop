@@ -15,10 +15,3 @@ class MessageSubs(StatesGroup):
     message = State()
 
 
-class EditProduct(StatesGroup):
-    edit = State()
-    name = State()
-    description = State()
-    count = State()
-    price = State()
-    photo = State()
