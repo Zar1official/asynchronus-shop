@@ -2,7 +2,7 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from utils.admin_utils import message_for_subs
-from states.admin_states import MessageSubs
+from states import MessageSubs
 from loader import dp, bot
 
 

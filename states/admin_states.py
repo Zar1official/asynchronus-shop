@@ -15,3 +15,5 @@ class MessageSubs(StatesGroup):
     message = State()
 
 
+class AddAdmin(StatesGroup):
+    confirm = State()

@@ -1,7 +1,7 @@
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from markups import admin_markups
-from states.admin_states import AddProduct
+from states import AddProduct
 from loader import dp, bot, shopDB
 from aiogram import types
 from utils.admin_utils import notify_subs
