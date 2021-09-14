@@ -1,4 +1,4 @@
 from .shop import ShopDB
-from .users import SubDB
+from .users import SubDB, AdminsDB
 
 

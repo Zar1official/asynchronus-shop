@@ -31,3 +31,15 @@ class SubDB(DB):
             result.append(document)
         return result
 
+
+class AdminsDB(DB):
+
+    async def add_admin(self):
+        pass
+
+    async def get_admins(self):
+        cursor = self.collection.find({})
+        result = []
+        async for document in cursor:
+            result.append(document['user_id'])
+        return result

@@ -1,6 +1,5 @@
 from aiogram import types
-import config
-from loader import dp, subscribeDB
+from loader import dp, subscribeDB, adminsDB
 from markups import subscribe_mailing_markups, admin_markups
 from utils.navigation_utils import send_products
 
@@ -19,7 +18,8 @@ async def navigation(message: types.Message):
                                  reply_markup=subscribe_mailing_markups.sub_mailing
                                  )
     elif message.text == "Админ 👨":
-        if message.from_user.id not in config.ADMIN_IDS:
+        admins = await adminsDB.get_admins()
+        if message.from_user.id not in admins:
             await message.answer('Вы не админ!')
         else:
             await message.answer(text="Панель администратора",
