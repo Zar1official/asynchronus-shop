@@ -56,7 +56,7 @@ async def send_admins(dp: Dispatcher, user_id):
     for admin in admins:
         basket.append(asyncio.create_task(dp.bot.send_message(
             chat_id=user_id,
-            text="Имя администратора: {0}"
+            text="Имя администратора: {0}\n\n"
                  "ID администратора: {1}".format(admin["user_name"], admin["user_id"]),
             reply_markup=InlineKeyboardMarkup().add(
                 InlineKeyboardButton("Удалить админа", callback_data=f"remove_admin_{admin['user_id']}")

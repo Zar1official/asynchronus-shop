@@ -18,8 +18,7 @@ async def navigation(message: types.Message):
                                  reply_markup=subscribe_mailing_markups.sub_mailing
                                  )
     elif message.text == "Админ 👨":
-        admins = await adminsDB.get_admins()
-        if message.from_user.id not in admins:
+        if not await adminsDB.is_admin(message.from_user.id):
             await message.answer('Вы не админ!')
         else:
             await message.answer(text="Панель администратора",

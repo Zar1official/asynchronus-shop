@@ -46,13 +46,24 @@ class AdminsDB(DB):
         cursor = self.collection.find({})
         result = []
         async for document in cursor:
+            result.append(document)
+        return result
+
+    async def get_admins_ids(self):
+        cursor = self.collection.find({})
+        result = []
+        async for document in cursor:
             result.append(document["user_id"])
         return result
+
+    async def is_admin(self, user_id):
+        admins = await self.get_admins_ids()
+        return int(user_id) in admins
 
     async def remove_admin(self, user_id):
         await self.collection.delete_one(
             {
-                "user_id": user_id
+                "user_id": int(user_id)
             }
         )
 
