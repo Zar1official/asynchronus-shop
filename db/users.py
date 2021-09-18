@@ -50,7 +50,11 @@ class AdminsDB(DB):
         return result
 
     async def remove_admin(self, user_id):
-        pass
+        await self.collection.delete_one(
+            {
+                "user_id": user_id
+            }
+        )
 
     async def admin_exists(self, user_id):
         result = await self.collection.find_one(

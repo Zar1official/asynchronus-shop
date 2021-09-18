@@ -2,7 +2,7 @@ from aiogram import Dispatcher
 import asyncio
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 import aiogram.utils.exceptions
-from loader import subscribeDB, shopDB
+from loader import subscribeDB, shopDB, adminsDB
 
 
 async def notify_subs(dp: Dispatcher, data):
@@ -45,6 +45,21 @@ async def send_products(dp: Dispatcher, user_id):
             document=product['photo'],
             reply_markup=InlineKeyboardMarkup().add(
                 InlineKeyboardButton("Удалить товар", callback_data=f"remove_product_{product['_id']}")
+            )
+        )))
+    await asyncio.gather(*basket)
+
+
+async def send_admins(dp: Dispatcher, user_id):
+    admins = await adminsDB.get_admins()
+    basket = []
+    for admin in admins:
+        basket.append(asyncio.create_task(dp.bot.send_message(
+            chat_id=user_id,
+            text="Имя администратора: {0}"
+                 "ID администратора: {1}".format(admin["user_name"], admin["user_id"]),
+            reply_markup=InlineKeyboardMarkup().add(
+                InlineKeyboardButton("Удалить админа", callback_data=f"remove_admin_{admin['user_id']}")
             )
         )))
     await asyncio.gather(*basket)
