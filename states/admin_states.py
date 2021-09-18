@@ -16,4 +16,7 @@ class MessageSubs(StatesGroup):
 
 
 class AddAdmin(StatesGroup):
+    id = State()
+    name = State()
     confirm = State()
+

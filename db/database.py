@@ -7,3 +7,4 @@ class DB:
         self.db = self.cluster[f'{db_name}']
         self.collection = self.db[f'{coll_name}']
 
+

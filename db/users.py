@@ -34,10 +34,11 @@ class SubDB(DB):
 
 class AdminsDB(DB):
 
-    async def add_admin(self, user_id):
+    async def add_admin(self, user_id, user_name):
         await self.collection.insert_one(
             {
-                "user_id": user_id
+                "user_id": int(user_id),
+                "user_name": user_name
             }
         )
 
@@ -46,4 +47,15 @@ class AdminsDB(DB):
         result = []
         async for document in cursor:
             result.append(document["user_id"])
+        return result
+
+    async def remove_admin(self, user_id):
+        pass
+
+    async def admin_exists(self, user_id):
+        result = await self.collection.find_one(
+            {
+                "user_id": int(user_id)
+            }
+        )
         return result

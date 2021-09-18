@@ -26,3 +26,13 @@ notify_about_product = InlineKeyboardMarkup().add(
     InlineKeyboardButton('Не уведомлять подписчиков', callback_data='do_not_notify_about_product')
 )
 
+cancel_adding_admin = InlineKeyboardMarkup().add(
+    InlineKeyboardButton('Отмена', callback_data='cancel_adding_admin')
+)
+
+confirm_adding_admin = InlineKeyboardMarkup().add(
+    InlineKeyboardButton('Подтвердить', callback_data='confirm_adding_admin'),
+    InlineKeyboardButton('Отмена', callback_data='cancel_adding_admin')
+)
+
+

@@ -1,7 +1,7 @@
 from aiogram import Dispatcher
 import asyncio
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
+import aiogram.utils.exceptions
 from loader import subscribeDB, shopDB
 
 
@@ -49,3 +49,18 @@ async def send_products(dp: Dispatcher, user_id):
         )))
     await asyncio.gather(*basket)
 
+
+def is_user_valid(user_id) -> bool:
+    try:
+        int(user_id)
+    except ValueError:
+        return False
+    return True
+
+
+async def is_chat_valid(chat_id, dp: Dispatcher) -> bool:
+    try:
+        await dp.bot.get_chat(int(chat_id))
+    except aiogram.utils.exceptions.ChatNotFound:
+        return False
+    return True
