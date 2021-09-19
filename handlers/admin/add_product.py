@@ -83,8 +83,8 @@ async def confirm_product(query: CallbackQuery, state: FSMContext):
         await shopDB.add_product(
             product_name=data['name'],
             product_description=data['description'],
-            product_count=data['count'],
-            product_price=data['price'],
+            product_count=int(data['count']),
+            product_price=int(data['price']),
             product_photo=data['photo_id']
         )
         await bot.send_message(query.from_user.id,

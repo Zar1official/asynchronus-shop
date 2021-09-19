@@ -1,54 +1,20 @@
-from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-
-from loader import bot, dp, shopDB
+from loader import bot, dp, basketDB, shopDB
 
 
-@dp.callback_query_handler(lambda call: call.data.startswith("buy_product"))
-async def buy_product(query: CallbackQuery, state: FSMContext):
-    await bot.edit_message_caption(
-        chat_id=query.message.chat.id,
-        message_id=query.message.message_id,
-        caption="Выбрано - 0"
-    )
-    product_id = query.data.split('_')[2]
-    await bot.edit_message_reply_markup(
-        chat_id=query.message.chat.id,
-        message_id=query.message.message_id,
-        reply_markup=InlineKeyboardMarkup().add(
-            InlineKeyboardButton("+", callback_data=f"increase_product_count_{product_id}"),
-            InlineKeyboardButton("Оплатить", callback_data=f"pay_product_{product_id}"),
-            InlineKeyboardButton("-", callback_data=f"decrease_product_count_{product_id}")
-        )
-    )
-    await state.update_data(chosen=product_id)
-    await state.set_state(f"buy_{product_id}")
-
-
-@dp.callback_query_handler(lambda call: call.data.startswith("increase_product_count"))
-async def increase_count(query: CallbackQuery, state: FSMContext):
-    data=await state.get_data()
-    print(await state.get_state())
-    # await state
-    # await state.update_data(chosen=chosen)
-    # await bot.edit_message_caption(
-    #     chat_id=query.message.chat.id,
-    #     message_id=query.message.message_id,
-    #     caption=f"Выбрано - {chosen}"
-    # )
-    #
-    # await bot.edit_message_reply_markup(
-    #     chat_id=query.message.chat.id,
-    #     message_id=query.message.message_id,
-    #     reply_markup=InlineKeyboardMarkup().add(
-    #         InlineKeyboardButton("+", callback_data=f"increase_product_count_{product_id}"),
-    #         InlineKeyboardButton("Оплатить", callback_data=f"pay_product_{product_id}"),
-    #         InlineKeyboardButton("-", callback_data=f"decrease_product_count_{product_id}")
-    #     )
-    # )
-    pass
-
-# @dp.callback_query_handler(text="decrease_product_count")
-# async def decrease_count():
-#     pass
+@dp.callback_query_handler(lambda call: call.data.startswith("buy_product_"))
+async def add_to_basket(query: CallbackQuery):
+    product_id = query.data.split("_")[2]
+    if not await basketDB.is_in_basket(query.from_user.id, product_id):
+        product_price = await shopDB.get_product_attr(product_id, "price")
+        product_name = await shopDB.get_product_attr(product_id, "name")
+        await basketDB.add_to_basket(query.from_user.id, product_id, product_name, product_price)
+        await query.answer("Товар добавлен в корзину.")
+    else:
+        count_in_basket = await basketDB.get_attr_in_basket(query.from_user.id, product_id, "product_count")
+        count_in_store = await shopDB.get_product_attr(product_id, "count")
+        if count_in_store > count_in_basket:
+            await basketDB.update_in_basket(query.from_user.id, product_id)
+            await query.answer(f"Товар добавлен в корзину ({count_in_basket + 1}).")
+        else:
+            await query.answer("Товар закончился.")

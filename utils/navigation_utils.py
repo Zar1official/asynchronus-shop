@@ -19,7 +19,7 @@ async def send_products(dp: Dispatcher, user_id):
             caption=caption,
             document=product['photo'],
             reply_markup=InlineKeyboardMarkup().add(
-                InlineKeyboardButton("Купить товар", callback_data=f"buy_product_{product['_id']}")
+                InlineKeyboardButton("В корзину", callback_data=f"buy_product_{product['_id']}")
             )
         )))
     await asyncio.gather(*basket)
