@@ -1,5 +1,6 @@
-from handlers.admin import dp
-from handlers.navigation import dp
-from handlers.users import dp
+from .users import dp
+from .admin import dp
+from .navigation import dp
 
 __all__ = ["dp"]
+
