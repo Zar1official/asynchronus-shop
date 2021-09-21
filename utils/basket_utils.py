@@ -4,7 +4,6 @@ from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from loader import basketDB
 
 
-
 async def send_basket(user_id, dp: Dispatcher):
     basket_data = await basketDB.get_basket(user_id)
     total_amount = 0
