@@ -38,5 +38,4 @@ class BasketDB(DB):
         return result[attr]
 
     async def remove_basket(self, user_id):
-        print(user_id)
         await self.collection.delete_many({"user_id": user_id})
