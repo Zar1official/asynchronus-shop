@@ -1,7 +1,5 @@
 from aiogram import Dispatcher
-# import asyncio
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
-from aiogram.types import InlineKeyboardMarkup
 
 from loader import basketDB
 
