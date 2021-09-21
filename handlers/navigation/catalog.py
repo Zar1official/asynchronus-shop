@@ -1,5 +1,5 @@
 from aiogram.types import CallbackQuery
-from loader import bot, dp, basketDB, shopDB
+from loader import dp, basketDB, shopDB
 
 
 @dp.callback_query_handler(lambda call: call.data.startswith("buy_product_"))
