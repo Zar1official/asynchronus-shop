@@ -1,5 +1,5 @@
 from aiogram import types
-from loader import dp, subscribeDB, adminsDB
+from loader import dp, bot, subscribeDB, adminsDB
 from markups import subscribe_mailing_markups, admin_markups
 from utils.navigation_utils import send_products
 from utils.basket_utils import send_basket
@@ -26,4 +26,4 @@ async def navigation(message: types.Message):
                                  reply_markup=admin_markups.admin_nav
                                  )
     elif message.text == "Корзина 🧺":
-        await send_basket(message.from_user.id, dp)
+        await send_basket(message.from_user.id,bot)
