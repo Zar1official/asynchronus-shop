@@ -2,7 +2,6 @@ from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from states import AddAdmin
-from utils.admin_utils import is_user_valid, is_chat_valid
 from loader import dp, bot, adminsDB
 from markups.admin_markups import cancel_adding_admin, confirm_adding_admin
 
@@ -19,8 +18,8 @@ async def add_administrator(query: CallbackQuery):
 
 @dp.message_handler(state=AddAdmin.id)
 async def add_admin_id(message: types.Message, state: FSMContext):
-    if is_user_valid(message.text):
-        if await is_chat_valid(message.text, dp):
+    if adminsDB.is_user_valid(message.text):
+        if await adminsDB.is_chat_valid(message.text, dp):
             text = "Введите имя администратора " \
                    "(будет отображаться в списке администраторов)"
 
