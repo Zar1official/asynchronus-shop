@@ -36,3 +36,7 @@ class BasketDB(DB):
     async def get_attr_in_basket(self, user_id, product_id, attr):
         result = await self.is_in_basket(user_id, product_id)
         return result[attr]
+
+    async def remove_basket(self, user_id):
+        print(user_id)
+        await self.collection.delete_many({"user_id": user_id})
