@@ -2,6 +2,7 @@ from aiogram import types
 from loader import dp, subscribeDB, adminsDB
 from markups import subscribe_mailing_markups, admin_markups
 from utils.navigation_utils import send_products
+from utils.basket_utils import send_basket
 
 
 @dp.message_handler()
@@ -24,3 +25,5 @@ async def navigation(message: types.Message):
             await message.answer(text="Панель администратора",
                                  reply_markup=admin_markups.admin_nav
                                  )
+    elif message.text == "Корзина 🧺":
+        await send_basket(message.from_user.id, dp)

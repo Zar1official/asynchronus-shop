@@ -3,11 +3,10 @@ from .database import DB
 
 class BasketDB(DB):
     async def get_basket(self, user_id):
-        result = await self.collection.find_one(
-            {
-                "user_id": int(user_id)
-            }
-        )
+        cursor = self.collection.find({"user_id": user_id})
+        result = []
+        async for document in cursor:
+            result.append(document)
         return result
 
     async def add_to_basket(self, user_id, product_id, product_name, product_price):
