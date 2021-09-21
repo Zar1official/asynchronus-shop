@@ -1,6 +1,6 @@
 from aiogram import Dispatcher
 import asyncio
-from markups.basket_markups import basket_nav
+from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from loader import shopDB
 
 
@@ -17,6 +17,8 @@ async def send_products(dp: Dispatcher, user_id):
             chat_id=user_id,
             caption=caption,
             document=product['photo'],
-            reply_markup=basket_nav
+            reply_markup=InlineKeyboardMarkup().add(
+                InlineKeyboardButton("В корзину", callback_data=f"buy_product_{product['_id']}")
+            )
         )))
     await asyncio.gather(*basket)
