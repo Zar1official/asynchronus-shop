@@ -1,20 +1,14 @@
-from aiogram import Bot
-from markups.basket_markups import basket_nav
-
+from aiogram import types
 from loader import basketDB
 
 
-async def send_basket(user_id, bot: Bot):
+async def set_prices(user_id):
     basket_data = await basketDB.get_basket(user_id)
-
     if basket_data:
-        total_amount = 0
-        names = ""
+        prices = []
         for doc in basket_data:
-            total_amount += doc['product_price'] * doc['product_count']
-            names += f"<b>{doc['product_name']}</b>: {doc['product_count']}, "
-        await bot.send_message(user_id,
-                               names + '\n\nОбщая сумма покупки: {0}'.format(total_amount),
-                               reply_markup=basket_nav)
-    else:
-        await bot.send_message(user_id, "В корзине нет товаров!")
+            prices.append(
+                types.LabeledPrice(label=f"{doc['product_name']}: {doc['product_count']}",
+                                   amount=doc['product_count'] * doc['product_price'] * 100))
+        return prices
+    return None
