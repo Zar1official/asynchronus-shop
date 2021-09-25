@@ -1,6 +1,7 @@
+from aiogram import types
 from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
-from loader import dp, basketDB, shopDB
+from loader import dp, bot, basketDB, shopDB
 from states import BuyProduct
 
 
@@ -26,3 +27,9 @@ async def add_to_basket(query: CallbackQuery):
 async def cancel_catalog(query: CallbackQuery, state: FSMContext):
     await state.reset_state()
     await query.answer()
+
+
+@dp.message_handler(state=BuyProduct.buy)
+async def locked_state(message: types.Message):
+    await bot.delete_message(message.chat.id, message.message_id)
+    await message.answer("Нажмите назад для выхода из каталога товаров!")

@@ -46,4 +46,3 @@ async def navigation(message: types.Message):
             await Basket.on_buy.set()
         else:
             await message.answer("Корзина пуста!")
-
