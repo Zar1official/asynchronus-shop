@@ -10,7 +10,7 @@ from config import YOO_TOKEN
 @dp.message_handler()
 async def navigation(message: types.Message):
     if message.text == "Товары 🔥":
-        await send_products(dp, message.from_user.id)
+        await send_products(bot, message.from_user.id)
     elif message.text == "Рассылка ✉":
         if await subscribeDB.user_exists(message.from_user.id):
             await message.answer('Отписаться от рассылки?',
