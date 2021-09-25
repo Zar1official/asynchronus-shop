@@ -20,8 +20,11 @@ async def send_products(bot: Bot, user_id):
                 document=product['photo'],
                 reply_markup=InlineKeyboardMarkup().add(
                     InlineKeyboardButton("В корзину", callback_data=f"buy_product_{product['_id']}")
+                ).add(
+                    InlineKeyboardButton("Назад", callback_data="cancel_catalog")
                 )
             )))
         await asyncio.gather(*basket)
     else:
-        await bot.send_message(user_id, "Товаров нет!")
+        await bot.send_message(user_id, "Товаров нет!", reply_markup=InlineKeyboardMarkup().add(
+            InlineKeyboardButton("Назад", callback_data="cancel_catalog")))

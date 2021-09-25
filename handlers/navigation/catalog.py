@@ -1,5 +1,7 @@
+from aiogram.dispatcher import FSMContext
 from aiogram.types import CallbackQuery
 from loader import dp, basketDB, shopDB
+from states import BuyProduct
 
 
 @dp.callback_query_handler(lambda call: call.data.startswith("buy_product_"))
@@ -18,3 +20,9 @@ async def add_to_basket(query: CallbackQuery):
             await query.answer(f"Добавлено в корзину {count_in_basket + 1}.")
         else:
             await query.answer("Товар закончился.")
+
+
+@dp.callback_query_handler(state=BuyProduct.buy)
+async def cancel_catalog(query: CallbackQuery, state: FSMContext):
+    await state.reset_state()
+    await query.answer()

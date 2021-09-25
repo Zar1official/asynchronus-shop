@@ -3,13 +3,14 @@ from loader import dp, bot, subscribeDB, adminsDB
 from markups import subscribe_mailing_markups, admin_markups, basket_markups
 from utils.navigation_utils import send_products
 from utils.basket_utils import set_prices
-from states import Basket
+from states import Basket, BuyProduct
 from config import YOO_TOKEN
 
 
 @dp.message_handler()
 async def navigation(message: types.Message):
     if message.text == "Товары 🔥":
+        await BuyProduct.buy.set()
         await send_products(bot, message.from_user.id)
     elif message.text == "Рассылка ✉":
         if await subscribeDB.user_exists(message.from_user.id):
