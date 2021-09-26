@@ -39,10 +39,13 @@
 Скоро!
 
 ## Стек
-- Python: https://www.python.org/
-- Aiogram: https://github.com/aiogram/aiogram
-- Motor: https://github.com/mongodb/motor
-- MongoDB: https://www.mongodb.com/
+>Python: https://www.python.org/
+>
+>Aiogram: https://github.com/aiogram/aiogram
+>
+>Motor: https://github.com/mongodb/motor
+>
+>MongoDB: https://www.mongodb.com/
 
 
 ![стек](https://user-images.githubusercontent.com/87152110/134823163-8d34b729-bfc0-4ace-9116-f19dc4d34e4a.png)
