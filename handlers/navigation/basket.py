@@ -15,7 +15,11 @@ async def process_pre_checkout_query(pre_checkout_query: types.PreCheckoutQuery)
 @dp.message_handler(content_types=ContentType.SUCCESSFUL_PAYMENT, state=Basket.on_buy)
 async def process_pay(message: types.Message, state: FSMContext):
     if message.successful_payment.invoice_payload.__contains__(str(message.from_user.id)):
-        await decrease_counts(message.from_user.id)
+        await decrease_counts(
+            message.from_user.id,
+            message.successful_payment.invoice_payload.split("_")[1],
+            message.from_user.username,
+            bot)
         await basketDB.remove_basket(message.from_user.id)
         await message.answer("Операция проведена успешно! Ожидайте, когда с вами свяжется наш менеджер.")
         await state.reset_state()
