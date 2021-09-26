@@ -5,7 +5,7 @@ from loader import dp, bot, basketDB, shopDB
 from states import BuyProduct
 
 
-@dp.callback_query_handler(lambda call: call.data.startswith("buy_product_"))
+@dp.callback_query_handler(lambda call: call.data.startswith("buy_product_"), state=BuyProduct.buy)
 async def add_to_basket(query: CallbackQuery):
     product_id = query.data.split("_")[2]
     if not await basketDB.is_in_basket(query.from_user.id, product_id):

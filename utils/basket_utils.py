@@ -24,3 +24,4 @@ async def decrease_counts(user_id):
             await shopDB.remove_product(product_id)
         else:
             await shopDB.edit_product(product_id, "count", product_count - product_count_in_basket)
+
