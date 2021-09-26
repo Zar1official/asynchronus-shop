@@ -25,3 +25,6 @@ async def decrease_counts(user_id):
         else:
             await shopDB.edit_product(product_id, "count", product_count - product_count_in_basket)
 
+
+# async def notify_manager():
+#

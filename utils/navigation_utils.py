@@ -33,5 +33,9 @@ async def send_products(bot: Bot, user_id):
 
 
 def generate_order_number():
-    alphabet = string.digits
-    return random.shuffle(alphabet)
+    alphabet = list(string.digits)
+    random.shuffle(alphabet)
+    result = ""
+    for i in alphabet:
+        result += i
+    return result
