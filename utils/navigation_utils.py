@@ -2,6 +2,8 @@ import asyncio
 from aiogram import Bot
 from aiogram.types import InlineKeyboardMarkup, InlineKeyboardButton
 from loader import shopDB
+import random
+import string
 
 
 async def send_products(bot: Bot, user_id):
@@ -28,3 +30,8 @@ async def send_products(bot: Bot, user_id):
     else:
         await bot.send_message(user_id, "Товаров нет!", reply_markup=InlineKeyboardMarkup().add(
             InlineKeyboardButton("Назад", callback_data="cancel_catalog")))
+
+
+def generate_order_number():
+    alphabet = string.digits
+    return random.shuffle(alphabet)
