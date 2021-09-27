@@ -17,7 +17,7 @@ async def process_pay(message: types.Message, state: FSMContext):
     if message.successful_payment.invoice_payload.__contains__(str(message.from_user.id)):
         await decrease_counts(
             message.from_user.id,
-            message.successful_payment.invoice_payload.split("_")[1],
+            message.successful_payment.invoice_payload.split("_")[2],
             message.from_user.username,
             bot)
         await basketDB.remove_basket(message.from_user.id)
