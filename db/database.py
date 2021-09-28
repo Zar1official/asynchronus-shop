@@ -9,6 +9,13 @@ class DB:
         self.db = self.cluster[f'{db_name}']
         self.collection = self.db[f'{coll_name}']
 
+    async def get_all_data(self):
+        cursor = self.collection.find({})
+        result = []
+        async for document in cursor:
+            result.append(document)
+        return result
+
     @staticmethod
     def is_user_valid(user_id) -> bool:
         try:

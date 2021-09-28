@@ -22,11 +22,7 @@ class ShopDB(DB):
         await self.collection.delete_many({})
 
     async def get_products(self):
-        cursor = self.collection.find({})
-        result = []
-        async for document in cursor:
-            result.append(document)
-        return result
+        await super().get_all_data()
 
     async def edit_product(self, product_id, key, value):
         await self.collection.update_one({"_id": ObjectId(product_id)}, {"$set": {key: value}})

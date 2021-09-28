@@ -25,11 +25,7 @@ class SubDB(DB):
         return result
 
     async def get_users(self):
-        cursor = self.collection.find({})
-        result = []
-        async for document in cursor:
-            result.append(document)
-        return result
+        await super().get_all_data()
 
 
 class AdminsDB(DB):
@@ -43,11 +39,7 @@ class AdminsDB(DB):
         )
 
     async def get_admins(self):
-        cursor = self.collection.find({})
-        result = []
-        async for document in cursor:
-            result.append(document)
-        return result
+        await super().get_all_data()
 
     async def get_admins_ids(self):
         cursor = self.collection.find({})

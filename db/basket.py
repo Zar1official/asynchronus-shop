@@ -1,5 +1,6 @@
 from .database import DB
 
+
 class BasketDB(DB):
     async def get_basket(self, user_id):
         cursor = self.collection.find({"user_id": user_id})
